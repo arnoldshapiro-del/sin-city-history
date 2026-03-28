@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIN CITY — Newport KY & Las Vegas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4AF37;--gold-l:#F0D060;--gold-d:#8B7220;--red:#8B0000;--nred:#FF2442;--teal:#00FFD4;--ink:#0A0805;--smoke:#111009;--parch:#F5E6C8;--ember:#FF6B1A;--wh:#FAF8F2;--gr:#8A7F6E;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--wh);font-family:"Crimson Pro",Georgia,serif;overflow-x:hidden;cursor:none;}
+#cur{position:fixed;width:18px;height:18px;border:2px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:all .15s ease;mix-blend-mode:difference;}
+#cur2{position:fixed;width:5px;height:5px;background:var(--nred);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red),var(--gold),var(--teal));z-index:9999;}
+body::after{content:"";position:fixed;inset:0;opacity:.04;z-index:9000;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+/* INTRO */
+#intro{position:fixed;inset:0;background:#000;z-index:98000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;transition:opacity .9s ease;}
+#intro.gone{opacity:0;pointer-events:none;}
+.ism{font-family:"Special Elite",monospace;font-size:.75rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;opacity:0;animation:fu .6s ease forwards;}
+.ibig{font-family:"Bebas Neue",sans-serif;font-size:clamp(4rem,12vw,9rem);background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fu .8s .3s ease forwards;}
+.ism:nth-child(3){animation-delay:.8s;}.ism:nth-child(4){animation-delay:1.1s;color:var(--gr);}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,8,5,.95),transparent);backdrop-filter:blur(10px);}
+.nlogo{font-family:"Bebas Neue",sans-serif;font-size:1.3rem;color:var(--gold);letter-spacing:.15em;}
+.nlinks{display:flex;gap:1.8rem;list-style:none;}
+.nlinks a{font-family:"Special Elite",monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(250,248,242,.55);text-decoration:none;transition:color .2s;}
+.nlinks a:hover{color:var(--gold);}
+@media(max-width:700px){.nlinks{display:none;}}
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 50%,rgba(139,0,0,.45),transparent 60%),radial-gradient(ellipse at 75% 40%,rgba(212,175,55,.12),transparent 50%),#030201;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);background-size:55px 55px;animation:gmove 18s linear infinite;}
+.hscan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);}
+@keyframes gmove{0%{transform:perspective(600px) rotateX(8deg) translateY(0);}100%{transform:perspective(600px) rotateX(8deg) translateY(55px);}}
+.hc{position:relative;z-index:2;text-align:center;padding:2rem;}
+.heye{font-family:"Special Elite",monospace;font-size:clamp(.65rem,1.5vw,.88rem);letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fu 1s .3s ease forwards;}
+.htitle{font-family:"Bebas Neue",sans-serif;font-size:clamp(5rem,20vw,17rem);line-height:.83;background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 45%,var(--gold-d) 72%,var(--ember) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fu 1.2s .5s ease forwards;filter:drop-shadow(0 0 50px rgba(212,175,55,.2));}
+.hsub{font-family:"Playfair Display",serif;font-size:clamp(1rem,2.5vw,1.7rem);font-style:italic;color:var(--parch);margin:1.5rem 0;opacity:0;animation:fu 1s .9s ease forwards;}
+.hdiv{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.5rem 0;opacity:0;animation:fu 1s 1.1s ease forwards;}
+.hdiv::before,.hdiv::after{content:"";width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hdiamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);}
+.htag{font-family:"Special Elite",monospace;font-size:clamp(.62rem,1.5vw,.82rem);color:var(--nred);letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:fu 1s 1.3s ease forwards;}
+.hscroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:0;animation:fi 1s 2.2s ease forwards;}
+.hscroll span{font-family:"Special Elite",monospace;font-size:.6rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;}
+.sbar{width:1px;height:45px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2s ease infinite;}
+@keyframes sp{0%,100%{opacity:.3;transform:scaleY(.7);}50%{opacity:1;transform:scaleY(1);}}
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fi{from{opacity:0;}to{opacity:1;}}
+.rv{opacity:0;transform:translateY(35px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.rvl{opacity:0;transform:translateX(-35px);transition:opacity .7s ease,transform .7s ease;}
+.rvl.on{opacity:1;transform:translateX(0);}
+/* NEON STRIP */
+.nstrip{padding:3.5rem 4rem;background:#050302;display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:center;align-items:center;}
+.ns{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.4rem,2.5vw,2.2rem);animation:flk 3s ease infinite;}
+.ns:nth-child(1){color:#FF2442;text-shadow:0 0 8px #FF2442,0 0 25px #FF2442,0 0 50px #FF2442;animation-delay:0s;}
+.ns:nth-child(2){color:#00FFD4;text-shadow:0 0 8px #00FFD4,0 0 25px #00FFD4,0 0 50px #00FFD4;animation-delay:.4s;}
+.ns:nth-child(3){color:var(--gold-l);text-shadow:0 0 8px var(--gold-l),0 0 25px var(--gold),0 0 50px var(--gold-d);animation-delay:.8s;}
+.ns:nth-child(4){color:#FF69B4;text-shadow:0 0 8px #FF69B4,0 0 25px #FF69B4,0 0 50px #FF69B4;animation-delay:1.2s;}
+.ns:nth-child(5){color:#FFE600;text-shadow:0 0 8px #FFE600,0 0 25px #FFE600,0 0 50px #FFE600;animation-delay:.6s;}
+.ns:nth-child(6){color:#FF6B1A;text-shadow:0 0 8px #FF6B1A,0 0 25px #FF6B1A,0 0 50px #FF6B1A;animation-delay:1s;}
+@keyframes flk{0%,88%,100%{opacity:1;}89%{opacity:.5;}91%{opacity:1;}93%{opacity:.3;}95%{opacity:1;}}
+/* TICKER */
+.ticker{background:var(--red);padding:.7rem 0;overflow:hidden;white-space:nowrap;border-top:2px solid var(--gold-d);border-bottom:2px solid var(--gold-d);}
+.tinner{display:inline-block;animation:tick 45s linear infinite;}
+.tinner span{font-family:"Special Elite",monospace;font-size:.78rem;letter-spacing:.2em;color:var(--parch);text-transform:uppercase;padding:0 2.5rem;}
+.tinner span::before{content:"★ ";color:var(--gold);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+/* BAND */
+.band{width:100%;padding:1.2rem 4rem;background:rgba(100,0,0,.75);overflow:hidden;position:relative;border-top:1px solid rgba(212,175,55,.12);border-bottom:1px solid rgba(212,175,55,.12);}
+.band::before,.band::after{content:"";position:absolute;top:0;bottom:0;width:3px;background:var(--gold);}
+.band::before{left:0;}.band::after{right:0;}
+.btext{font-family:"Special Elite",monospace;font-size:clamp(.62rem,1.2vw,.8rem);letter-spacing:.32em;text-transform:uppercase;color:var(--parch);white-space:nowrap;display:inline-block;animation:tick 35s linear infinite;}
+/* LAYOUT */
+section{position:relative;padding:6rem 4rem;max-width:1400px;margin:0 auto;}
+.sbg{background:var(--smoke);}
+.full{max-width:100%;padding:6rem 4rem;}
+.ch{font-family:"Special Elite",monospace;font-size:.62rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
+.ch::after{content:"";flex:1;max-width:160px;height:1px;background:linear-gradient(to right,var(--gold-d),transparent);}
+.hl{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.5rem,7vw,6.5rem);line-height:.88;letter-spacing:.02em;margin-bottom:1.8rem;}
+.hl.gold{background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bt{font-size:clamp(.95rem,1.4vw,1.12rem);line-height:1.85;color:rgba(250,248,242,.86);max-width:72ch;}
+.bt+.bt{margin-top:1.3rem;}
+.bt strong{color:var(--gold-l);font-weight:600;}
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+@media(max-width:900px){.tc{grid-template-columns:1fr;gap:2.5rem;}}
+/* PULL QUOTE */
+.pq{border-left:4px solid var(--gold);padding:1.6rem 2.2rem;margin:2.5rem 0;background:rgba(212,175,55,.04);position:relative;}
+.pq::before{content:"\201C";font-family:"Playfair Display",serif;font-size:6rem;color:var(--gold-d);position:absolute;top:-1.2rem;left:.6rem;line-height:1;opacity:.4;}
+.pq p{font-family:"Playfair Display",serif;font-size:clamp(1.1rem,1.8vw,1.5rem);font-style:italic;line-height:1.5;color:var(--parch);}
+.pq cite{display:block;margin-top:.7rem;font-family:"Special Elite",monospace;font-size:.65rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;font-style:normal;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4rem;margin:2.5rem 0;}
+.sc{background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.17);padding:2rem 1.6rem;text-align:center;transition:transform .3s,border-color .3s,background .3s;cursor:default;}
+.sc:hover{transform:translateY(-5px);border-color:var(--gold);background:rgba(212,175,55,.09);}
+.snum{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.2rem,4.5vw,4rem);background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.slbl{font-family:"Special Elite",monospace;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gr);margin-top:.4rem;}
+.sctx{font-size:.85rem;color:rgba(250,248,242,.5);margin-top:.55rem;font-style:italic;}
+/* PORTRAITS */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;margin:2.5rem 0;}
+.pc{background:#0D0B08;border:1px solid rgba(212,175,55,.12);overflow:hidden;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s ease;}
+.pc:hover{transform:translateY(-7px) scale(1.01);box-shadow:0 25px 55px rgba(0,0,0,.6),0 0 0 1px var(--gold-d);}
+.pico{width:100%;height:170px;display:flex;align-items:center;justify-content:center;font-size:5rem;}
+.pc:nth-child(1) .pico{background:radial-gradient(ellipse,rgba(139,0,0,.4),#0D0B08);}
+.pc:nth-child(2) .pico{background:radial-gradient(ellipse,rgba(212,175,55,.18),#0D0B08);}
+.pc:nth-child(3) .pico{background:radial-gradient(ellipse,rgba(255,36,66,.2),#0D0B08);}
+.pc:nth-child(4) .pico{background:radial-gradient(ellipse,rgba(0,255,212,.1),#0D0B08);}
+.pc:nth-child(5) .pico{background:radial-gradient(ellipse,rgba(255,107,26,.2),#0D0B08);}
+.pc:nth-child(6) .pico{background:radial-gradient(ellipse,rgba(139,0,0,.28),#0D0B08);}
+.pbody{padding:1.3rem;border-top:2px solid var(--gold-d);}
+.pname{font-family:"Playfair Display",serif;font-size:1.18rem;font-weight:700;color:var(--gold-l);margin-bottom:.22rem;}
+.palias{font-family:"Special Elite",monospace;font-size:.65rem;color:var(--nred);letter-spacing:.17em;text-transform:uppercase;margin-bottom:.6rem;}
+.pdesc{font-size:.9rem;line-height:1.6;color:rgba(250,248,242,.72);}
+/* VENUES */
+.vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin:2.5rem 0;}
+.vc{background:#0D0B08;border:1px solid rgba(212,175,55,.1);padding:2rem;position:relative;overflow:hidden;transition:all .3s ease;}
+.vc::after{content:"";position:absolute;bottom:0;left:0;width:0;height:3px;background:linear-gradient(to right,var(--red),var(--gold));transition:width .35s ease;}
+.vc:hover::after{width:100%;}
+.vc:hover{background:#111009;}
+.vname{font-family:"Playfair Display",serif;font-size:1.2rem;color:var(--gold-l);margin-bottom:.35rem;font-style:italic;}
+.vtype{font-family:"Special Elite",monospace;font-size:.6rem;letter-spacing:.35em;color:var(--nred);text-transform:uppercase;margin-bottom:.8rem;}
+.vdesc{font-size:.92rem;line-height:1.6;color:rgba(250,248,242,.72);}
+/* TIMELINE */
+.tl{position:relative;padding:3rem 0;}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--gold) 8%,var(--gold) 92%,transparent);transform:translateX(-50%);}
+.ti{display:flex;gap:3rem;margin-bottom:4rem;align-items:flex-start;opacity:0;transition:opacity .7s ease,transform .7s ease;transform:translateY(25px);}
+.ti.on{opacity:1;transform:translateY(0);}
+.ti:nth-child(odd){padding-right:calc(50% + 2.5rem);}
+.ti:nth-child(even){flex-direction:row-reverse;padding-left:calc(50% + 2.5rem);}
+.tyr{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.2rem,4.5vw,4rem);color:var(--gold);line-height:1;min-width:100px;text-align:right;filter:drop-shadow(0 0 15px rgba(212,175,55,.3));}
+.ti:nth-child(even) .tyr{text-align:left;}
+.tdot{position:absolute;left:50%;transform:translateX(-50%);width:13px;height:13px;background:var(--gold);border:3px solid var(--ink);border-radius:50%;box-shadow:0 0 16px rgba(212,175,55,.6);margin-top:.8rem;}
+.tcont{flex:1;}
+.tcont h3{font-family:"Playfair Display",serif;font-size:1.25rem;color:var(--gold-l);margin-bottom:.35rem;}
+.tcont p{font-size:.97rem;line-height:1.7;color:rgba(250,248,242,.8);}
+@media(max-width:800px){
+  .tl::before{left:16px;}.tdot{left:16px;}
+  .ti:nth-child(odd),.ti:nth-child(even){flex-direction:row;padding:0;}
+  .tyr{min-width:65px;font-size:2rem;}
+}
+/* CONN VIZ */
+.conn{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;padding:3.5rem;background:rgba(10,8,5,.85);border:1px solid rgba(212,175,55,.13);margin:3rem 0;}
+@media(max-width:700px){.conn{grid-template-columns:1fr;}}
+.cblock{text-align:center;padding:1.4rem;}
+.cname{font-family:"Bebas Neue",sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;margin-bottom:.4rem;}
+.cdates{font-family:"Special Elite",monospace;font-size:.65rem;letter-spacing:.26em;color:var(--gr);}
+.cdesc{margin-top:.85rem;font-size:.93rem;line-height:1.6;color:rgba(250,248,242,.7);}
+.arrb{display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+.arrb span{font-family:"Special Elite",monospace;font-size:.6rem;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;text-align:center;}
+.arrv{font-size:2.3rem;color:var(--gold);animation:ap 2s ease infinite;}
+@keyframes ap{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.15);opacity:1;}}
+/* FEAT SECTIONS */
+.feat{width:100%;min-height:68vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:7rem 4rem;}
+.feat-nw{background:radial-gradient(ellipse at 30% 50%,rgba(139,0,0,.5),transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(255,107,26,.17),transparent 50%),linear-gradient(to bottom,#0A0805,#0C0604,#0A0805);}
+.feat-lv{background:radial-gradient(ellipse at 60% 40%,rgba(0,255,212,.1),transparent 50%),radial-gradient(ellipse at 30% 60%,rgba(255,36,66,.13),transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(212,175,55,.09),transparent 40%),linear-gradient(to bottom,#0A0805,#040A0D,#0A0805);}
+.fc{position:relative;z-index:2;max-width:860px;text-align:center;}
+/* ACCORDION */
+.acc{margin:2rem 0;}
+.ai{border-bottom:1px solid rgba(212,175,55,.13);}
+.ah{width:100%;background:none;border:none;padding:1.3rem 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:var(--wh);text-align:left;gap:1rem;}
+.ah h3{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--gold-l);font-style:italic;}
+.aico{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;color:var(--gold);transition:transform .3s;min-width:20px;text-align:center;}
+.ai.open .aico{transform:rotate(45deg);}
+.ab{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.23,1,.32,1);}
+.ai.open .ab{max-height:500px;}
+.abi{padding:0 0 1.3rem;font-size:1rem;line-height:1.75;color:rgba(250,248,242,.77);}
+/* SEP */
+.sep{display:flex;align-items:center;gap:1rem;margin:3.5rem 0;justify-content:center;}
+.sep::before,.sep::after{content:"";flex:1;max-width:220px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);}
+.sepc{display:flex;gap:.4rem;align-items:center;}
+.sepc span{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);display:block;}
+.sepc span:nth-child(2){width:9px;height:9px;}
+.hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--gold-d),transparent);margin:3rem 0;}
+.wm{position:absolute;right:-.5rem;top:-1rem;font-family:"Bebas Neue",sans-serif;font-size:10rem;color:rgba(212,175,55,.03);line-height:1;user-select:none;pointer-events:none;}
+/* NEON TEXT */
+.ngold{color:var(--gold-l);text-shadow:0 0 5px var(--gold-l),0 0 15px var(--gold),0 0 35px var(--gold-d);}
+.nred2{color:#fff;text-shadow:0 0 5px #fff,0 0 15px var(--nred),0 0 40px var(--nred),0 0 80px rgba(255,36,66,.4);animation:nf 4s ease infinite;}
+.nteal{color:#fff;text-shadow:0 0 5px #fff,0 0 15px var(--teal),0 0 40px var(--teal),0 0 80px rgba(0,255,212,.3);}
+@keyframes nf{0%,92%,100%{opacity:1;}93%{opacity:.6;}95%{opacity:1;}97%{opacity:.3;}99%{opacity:1;}}
+/* FOOTER */
+footer{background:#050302;border-top:1px solid rgba(212,175,55,.1);padding:5rem 4rem;text-align:center;}
+.ftitle{font-family:"Bebas Neue",sans-serif;font-size:clamp(2rem,5vw,3.8rem);background:linear-gradient(135deg,var(--gold-l),var(--gold-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.8rem;}
+.fsub{font-family:"Special Elite",monospace;font-size:.62rem;letter-spacing:.4em;color:var(--gr);text-transform:uppercase;}
+.fnote{margin-top:2rem;font-size:.88rem;color:rgba(250,248,242,.3);font-style:italic;}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur2"></div><div id="prog"></div>
+<div id="intro">
+  <div class="ism">A True Story of Vice, Glamour &amp; Power</div>
+  <div class="ibig">SIN CITY</div>
+  <div class="ism">Newport, Kentucky &middot; Las Vegas, Nevada</div>
+  <div class="ism">1795 &mdash; Present Day</div>
+</div>
+<nav>
+  <div class="nlogo">Sin City Chronicles</div>
+  <ul class="nlinks">
+    <li><a href="#newport">Newport</a></li>
+    <li><a href="#mob">The Mob</a></li>
+    <li><a href="#joints">The Joints</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#vegas">Las Vegas</a></li>
+    <li><a href="#flamingo">Flamingo</a></li>
+  </ul>
+</nav>
+<!-- HERO -->
+<div id="hero">
+  <div class="hbg"></div><div class="hgrid"></div><div class="hscan"></div>
+  <div class="hc">
+    <div class="heye">The Untold Story of America&#39;s Original Vice Empire</div>
+    <div class="htitle">SIN<br>CITY</div>
+    <div class="hsub">Before Las Vegas, there was a small Kentucky river city<br>that ran America&#39;s vices &mdash; and built Sin City itself</div>
+    <div class="hdiv"><div class="hdiamond"></div></div>
+    <div class="htag">Newport, Kentucky 1920&ndash;1961 &middot; Las Vegas, Nevada 1931&ndash;Present</div>
+  </div>
+  <div class="hscroll"><span>Scroll to Begin</span><div class="sbar"></div></div>
+</div>
+<!-- NEON SIGNS -->
+<div class="nstrip">
+  <div class="ns">CASINO</div><div class="ns">GIRLS</div><div class="ns">GAMBLING</div>
+  <div class="ns">ALL NIGHT</div><div class="ns">LIVE MUSIC</div><div class="ns">OPEN</div>
+</div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="tinner">
+    <span>Frank Sinatra</span><span>Marilyn Monroe</span><span>Dean Martin</span><span>Duke Ellington</span><span>Liberace</span><span>Milton Berle</span><span>President JFK</span><span>George Raft</span><span>Jimmy Durante</span><span>Gary Cooper</span><span>Eydie Gorm&eacute;</span><span>Steve Lawrence</span><span>Frank Sinatra</span><span>Marilyn Monroe</span><span>Dean Martin</span><span>Duke Ellington</span><span>Liberace</span><span>Milton Berle</span><span>President JFK</span><span>George Raft</span><span>Jimmy Durante</span><span>Gary Cooper</span><span>Eydie Gorm&eacute;</span><span>Steve Lawrence</span>
+  </div>
+</div>
+<!-- NEWPORT FEATURE -->
+<div id="newport" class="feat feat-nw">
+  <div class="fc">
+    <div class="ch" style="justify-content:center;">Chapter One</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,15vw,12rem);line-height:.85;margin-bottom:1rem;background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NEWPORT</h2>
+    <p class="bt" style="margin:0 auto;text-align:center;font-size:clamp(1rem,2vw,1.3rem);">A city of <strong>30,000</strong> that became a city of <strong>100,000</strong> after dark.<br><em>Vegas before Vegas. Sin City before Sin City.</em></p>
+    <div class="sep"><div class="sepc"><span></span><span></span><span></span></div></div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.9rem,1.5vw,1.05rem);color:rgba(250,248,242,.55);text-align:center;">Just across the Ohio River from Cincinnati &mdash; the city you know &mdash;<br>Kentucky&#39;s Northern river town became the gambling mecca of the United States.</p>
+  </div>
+</div>
+<!-- BY THE NUMBERS -->
+<section style="background:#0A0805;">
+  <div class="wm">I</div>
+  <div class="ch rv">The Numbers</div>
+  <h2 class="hl gold rv">By The<br>Numbers</h2>
+  <div class="sg">
+    <div class="sc rv"><div class="snum">$30M</div><div class="slbl">Annual Illegal Revenue</div><div class="sctx">In 1950s dollars &mdash; $350M+ today</div></div>
+    <div class="sc rv"><div class="snum">100K</div><div class="slbl">Nightly Population</div><div class="sctx">3&times; the city&#39;s 30,000 daytime residents</div></div>
+    <div class="sc rv"><div class="snum">7</div><div class="slbl">Casinos by 1950</div><div class="sctx">Plus 8 gambling clubs &amp; 12+ brothels</div></div>
+    <div class="sc rv"><div class="snum">$10M+</div><div class="slbl">Andrews&#39; Annual Revenue</div><div class="sctx">He declared just 10% on his taxes</div></div>
+    <div class="sc rv"><div class="snum">1795</div><div class="slbl">Year Newport Founded</div><div class="sctx">By Gen. James Taylor, Revolutionary War hero</div></div>
+    <div class="sc rv"><div class="snum">30yrs</div><div class="slbl">Of Mob Rule</div><div class="sctx">From Prohibition through the Kennedy era</div></div>
+  </div>
+</section>
+<!-- BAND -->
+<div class="band"><div class="btext">&ldquo;This was Vegas before Vegas&rdquo; &mdash; Mac Cooley, Newport Gangster Tour &nbsp;&middot;&nbsp; TIME Magazine: &ldquo;a gaudy brand of gambling and prostitution&rdquo; &nbsp;&middot;&nbsp; Frank Sinatra gambled in the back room &nbsp;&middot;&nbsp; Marilyn Monroe danced on the floor &nbsp;&middot;&nbsp; Dean Martin dealt blackjack &nbsp;&middot;&nbsp; The largest numbers racket in the entire United States &mdash; Northern Kentucky &nbsp;&middot;&nbsp;</div></div>
+<!-- ORIGINS -->
+<section class="sbg">
+  <div class="wm">II</div>
+  <div class="tc">
+    <div>
+      <div class="ch rvl">The Beginning</div>
+      <h2 class="hl gold rvl" style="font-size:clamp(2rem,4.5vw,4rem);">HOW IT<br>ALL BEGAN</h2>
+      <p class="bt rvl"><strong>George Remus</strong> &mdash; Cincinnati&#39;s King of the Bootleggers &mdash; found the medicinal alcohol loophole and built a bootlegging empire that made Al Capone look like an amateur. When federal agents caught him, his entire network relocated across the river to Newport, Kentucky, where city government was entirely for sale.</p>
+      <p class="bt rvl">The geography was perfect: the Ohio River created jurisdictional confusion, the city was small enough to bribe entirely, and Cincinnati&#39;s booming respectable population wanted somewhere to be <em>disrespectable</em> on Friday night. When Prohibition ended in 1933, the bootleggers simply pivoted. As NKU Professor Dr. Paul Tenkotte explains: <strong>&ldquo;Many of the bootleggers just segue-wayed themselves right into the gambling business.&rdquo;</strong></p>
+    </div>
+    <div>
+      <div class="pq rv"><p>Newport was the predecessor to Las Vegas &mdash; a manufactured vacation destination where tourists flocked under the cover of isolation and darkness.</p><cite>&mdash; Dr. Paul Tenkotte, NKU History Professor</cite></div>
+      <div class="pq rv" style="border-left-color:var(--nred);margin-top:0;"><p>The mob moved into an area that was small enough that the government and police could be bribed.</p><cite>&mdash; Historian Hackett, Newport Mob Research</cite></div>
+    </div>
+  </div>
+</section>
+<!-- THE MOB -->
+<div id="mob"></div>
+<section>
+  <div class="wm">III</div>
+  <div class="ch rv">The Power Structure</div>
+  <h2 class="hl gold rv">THE<br>SYNDICATE</h2>
+  <p class="bt rv" style="margin-bottom:2rem;">These weren&#39;t disorganized street thugs. They were sophisticated criminal businessmen with national reach &mdash; and they built Las Vegas.</p>
+  <div class="pg">
+    <div class="pc rv"><div class="pico">&#127913;</div><div class="pbody"><div class="pname">George Remus</div><div class="palias">King of the Bootleggers &middot; Cincinnati</div><div class="pdesc">Found the medicinal alcohol loophole and built the empire that seeded Newport&#39;s rise. Bigger than Capone in his prime. When imprisoned, his entire network relocated to Newport and kept running.</div></div></div>
+    <div class="pc rv"><div class="pico">&#128176;</div><div class="pbody"><div class="pname">Moe Dalitz</div><div class="palias">The Cleveland Four &middot; Leader</div><div class="pdesc">Led the Cleveland Four who controlled all of Northern Kentucky&#39;s underworld. Distributed liquor, bought River Downs racetrack. Then moved to Las Vegas and built the Desert Inn. Same genius, legal city.</div></div></div>
+    <div class="pc rv"><div class="pico">&#128299;</div><div class="pbody"><div class="pname">Frank &ldquo;Screw&rdquo; Andrews</div><div class="palias">The Numbers King &middot; Newport</div><div class="pdesc">His numbers racket was the largest in the entire United States. Grossed $10M+ per year, declared 10%. Six years in federal prison for tax evasion.</div></div></div>
+    <div class="pc rv"><div class="pico">&#128202;</div><div class="pbody"><div class="pname">Meyer Lansky</div><div class="palias">The Mob&#39;s Accountant</div><div class="pdesc">Called the CFO of organized crime. His fingerprints were on Newport AND Las Vegas. Handed Nevada operations to boyhood friend Bugsy Siegel. Together they built the most famous gambling city on earth.</div></div></div>
+    <div class="pc rv"><div class="pico">&#128165;</div><div class="pbody"><div class="pname">Benjamin &ldquo;Bugsy&rdquo; Siegel</div><div class="palias">The Man Who Built the Strip</div><div class="pdesc">Rare Jewish muscle in the mob. Took over the Flamingo project, ran costs to $6M, opened it December 26, 1946. Shot dead in Beverly Hills six months later. The Flamingo thrived without him.</div></div></div>
+    <div class="pc rv"><div class="pico">&#127944;</div><div class="pbody"><div class="pname">George Ratterman</div><div class="palias">The Hero Who Ended It</div><div class="pdesc">Notre Dame football legend. Drugged and framed with stripper April Flowers in 1961. The botched frame-up brought Bobby Kennedy&#39;s FBI. He became sheriff and watched the mob leave quietly.</div></div></div>
+  </div>
+</section>
+<!-- BAND 2 -->
+<div class="band" style="background:rgba(60,0,0,.8);"><div class="btext" style="animation-direction:reverse;animation-duration:38s;">The Cleveland Four &middot; Meyer Lansky &middot; Lucky Luciano &middot; Frank Costello &middot; Gus Greenbaum &middot; Moe Sedway &middot; Morris Kleinman &middot; Louis Rothkopf &middot; Sam Tucker &middot; Benny Binion &middot; Pete Schmidt &middot; &ldquo;Sleepout&rdquo; Louis Levinson &middot; Johnny &ldquo;TV&rdquo; Peluso &middot; Clarence &ldquo;Cueball&rdquo; Thomas &nbsp;&nbsp;</div></div>
+<!-- THE JOINTS -->
+<div id="joints"></div>
+<section class="sbg">
+  <div class="wm">IV</div>
+  <div class="ch rv">The Establishments</div>
+  <h2 class="hl gold rv">THE JOINTS</h2>
+  <p class="bt rv" style="margin-bottom:2rem;">Newport had two tiers: <strong>bust-out joints</strong> (rough, rigged, dangerous) and <strong>carpet joints</strong> &mdash; mob-run palaces of luxury rivaling anything in America. $30 million a year, after dark, in Northern Kentucky.</p>
+  <div class="vg">
+    <div class="vc rv"><div class="vname">The Beverly Hills Club</div><div class="vtype">Carpet Joint &middot; A-List Showroom</div><div class="vdesc">The crown jewel. Liberace, Milton Berle, Steve Lawrence, and Eydie Gorm&eacute; performed live. Owned by Pete Schmidt, it set the gold standard. The Vegas Rat Pack was effectively being born in Newport, Kentucky.</div></div>
+    <div class="vc rv"><div class="vname">Glenn Schmidt&#39;s Playtorium</div><div class="vtype">Mob HQ &middot; Casino &middot; Bowling</div><div class="vdesc">Bowling alley, bar, and casino under one roof &mdash; official Syndicate headquarters. Today it&#39;s the Syndicate Events Center and Gangsters Dueling Piano Bar. The building still stands in Newport.</div></div>
+    <div class="vc rv"><div class="vname">The Lookout House</div><div class="vtype">Carpet Joint &middot; Wilder, KY</div><div class="vdesc">Placed at the top of a hill &mdash; operators could see police coming from miles away. By the time police arrived, all gambling evidence had vanished into hidden rooms. Guests were simply having dinner.</div></div>
+    <div class="vc rv"><div class="vname">Mustang Betty&#39;s</div><div class="vtype">Full Service &middot; Monmouth Street</div><div class="vdesc">Three floors of vice: brothel upstairs, drinking and gambling below, and a nationwide phone-betting network in the basement. Now an antique store. Go look at it next time you cross the bridge, Arnie.</div></div>
+    <div class="vc rv"><div class="vname">The Yorkshire Club</div><div class="vtype">Casino &middot; Race Book</div><div class="vdesc">7,500 sq ft casino with racetrack result boards lining the rear wall. Results poured in from tracks nationwide. One of Newport&#39;s biggest betting operations, owned by gangsters Joe and Martin Berman.</div></div>
+    <div class="vc rv"><div class="vname">The Glenn Hotel &amp; Tropicana</div><div class="vtype">Hotel &middot; Nightclub &middot; Crime Scene</div><div class="vdesc">Where the mob made its fatal mistake: drugging and framing George Ratterman with stripper April Flowers. So clumsy it brought Bobby Kennedy&#39;s FBI. One botched room, one botched night &mdash; and the mob lost everything.</div></div>
+  </div>
+</section>
+<!-- DOWNFALL ACCORDION -->
+<section>
+  <div class="wm">V</div>
+  <div class="ch rv">The Downfall</div>
+  <h2 class="hl gold rv" style="font-size:clamp(2.2rem,5vw,4.5rem);">THE NIGHT<br>IT ALL ENDED</h2>
+  <p class="bt rv" style="margin-bottom:1.8rem;">The fall of Newport&#39;s empire is one of the most dramatic stories in American criminal history &mdash; a drugged football hero, Bobby Kennedy, a decapitated witness, and a quiet departure that felt like the end of an era.</p>
+  <div class="acc rv">
+    <div class="ai"><button class="ah" onclick="toggleAcc(this)"><h3>May 9, 1961 &mdash; The Frame-Up at the Glenn Hotel</h3><span class="aico">+</span></button><div class="ab"><div class="abi">Shortly before 3 a.m., reform candidate George Ratterman &mdash; Notre Dame football legend running for Campbell County Sheriff &mdash; was found half-naked in bed at the Glenn Hotel with exotic dancer April Flowers (real name: Juanita Hodges). Ratterman had zero memory of how he got there. The night before, he&rsquo;d had one drink with mob associate Tito Carinci in Cincinnati. One drink. That was it &mdash; he&rsquo;d been drugged. The setup was so transparently contrived that it immediately backfired.</div></div></div>
+    <div class="ai"><button class="ah" onclick="toggleAcc(this)"><h3>Bobby Kennedy Declares War on Newport</h3><span class="aico">+</span></button><div class="ab"><div class="abi">U.S. Attorney General Robert F. Kennedy was on a crusade against organized crime and looking to make his mark. The Ratterman case was his opportunity. He sent dozens of FBI agents to Newport. The federal government prosecuted the mob for violating Ratterman&#39;s civil rights. The trials lasted years. The government won. NKU itself was founded partly because of the federal investment Kennedy&#39;s involvement triggered in Campbell County.</div></div></div>
+    <div class="ai"><button class="ah" onclick="toggleAcc(this)"><h3>April Flowers Testifies &mdash; And Pays the Price</h3><span class="aico">+</span></button><div class="ab"><div class="abi">Juanita Hodges &mdash; April Flowers &mdash; turned on the mob and became a star witness. Her testimony was devastating. She was found decapitated in Miami a few years later. The murder was never solved. She had seen too much and known too much. In the world she moved through, that was always fatal.</div></div></div>
+    <div class="ai"><button class="ah" onclick="toggleAcc(this)"><h3>The Mob Packs Up and Goes West</h3><span class="aico">+</span></button><div class="ab"><div class="abi">Ratterman was elected sheriff and served four years. In his New York Times obituary he said: &ldquo;The other side knew what was coming, and they knew we knew.&rdquo; Newport &mdash; the original Sin City, the city that ran America&#39;s vices for three decades &mdash; went quiet. The gangsters moved to a desert in Nevada where gambling was actually legal. They built something much bigger.</div></div></div>
+  </div>
+</section>
+<!-- THE PIPELINE -->
+<div id="pipeline" style="background:#08060A;padding:6rem 4rem;">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="ch rv" style="justify-content:center;">The Through Line</div>
+    <h2 class="hl gold rv" style="text-align:center;font-size:clamp(2.5rem,7vw,6rem);">THE PIPELINE</h2>
+    <p class="bt rv" style="text-align:center;margin:0 auto 2.5rem;max-width:58ch;">The same men. The same money. The same philosophy. Newport was the proving ground. Las Vegas was the graduation ceremony.</p>
+    <div class="conn rv">
+      <div class="cblock"><div class="cname" style="color:#C41E3A;">NEWPORT</div><div class="cdates">1920 &mdash; 1961</div><div class="cdesc">Illegal gambling in a river city with a bribed government and A-list entertainment. 30,000 people by day. 100,000 by night. $30 million a year.</div></div>
+      <div class="arrb"><span>Same men<br>Same money<br>Same methods</span><div class="arrv">&rarr;</div><span>1961<br>Migration West</span></div>
+      <div class="cblock"><div class="cname" style="color:var(--teal);">LAS VEGAS</div><div class="cdates">1931 &mdash; Present</div><div class="cdesc">Where gambling was legal. The mob transplanted everything from Newport and built the most famous entertainment destination in the history of the world.</div></div>
+    </div>
+    <div class="sg" style="margin-top:1.5rem;">
+      <div class="sc rv" style="text-align:left;"><div class="slbl" style="margin-bottom:.5rem;">Shared Personnel</div><p style="font-size:.92rem;line-height:1.6;color:rgba(250,248,242,.76);">Moe Dalitz (Cleveland Four in KY &rarr; built Desert Inn in Vegas). Meyer Lansky (financed both). Gus Greenbaum (ran Flamingo hours after Siegel&#39;s murder).</p></div>
+      <div class="sc rv" style="text-align:left;"><div class="slbl" style="margin-bottom:.5rem;">Shared Philosophy</div><p style="font-size:.92rem;line-height:1.6;color:rgba(250,248,242,.76);">&ldquo;The mob wanted places with good food that looked nice. They didn&#39;t want bust-out joints.&rdquo; The luxury carpet-joint model moved directly from Newport to the Strip.</p></div>
+      <div class="sc rv" style="text-align:left;"><div class="slbl" style="margin-bottom:.5rem;">The Key Difference</div><p style="font-size:.92rem;line-height:1.6;color:rgba(250,248,242,.76);">In Nevada, gambling was <em>legal</em>. The mob could build openly and create something Newport &mdash; a borrowed, borrowed city &mdash; never could have become.</p></div>
+    </div>
+  </div>
+</div>
+<!-- LAS VEGAS FEATURE -->
+<div id="vegas" class="feat feat-lv">
+  <div class="fc">
+    <div class="ch" style="justify-content:center;">Chapter Two</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,15vw,12rem);line-height:.85;margin-bottom:1rem;color:var(--teal);text-shadow:0 0 40px rgba(0,255,212,.2);">LAS VEGAS</h2>
+    <p class="bt" style="margin:0 auto;text-align:center;font-size:clamp(1rem,2vw,1.3rem);">A railroad stop in the Nevada desert<br>that became <strong>the Entertainment Capital of the World.</strong></p>
+  </div>
+</div>
+<!-- FREMONT STREET ERA -->
+<section style="background:#0A0805;">
+  <div class="wm">VI</div>
+  <div class="tc">
+    <div>
+      <div class="ch rvl">Original Las Vegas</div>
+      <h2 class="hl gold rvl" style="font-size:clamp(2rem,4.5vw,4rem);">FREMONT STREET:<br>WHERE IT STARTED</h2>
+      <p class="bt rvl">Las Vegas was born from a railroad deal. In 1902, Senator William Clark bought 1,800 acres to make it a train stop. In 1905, he held a land auction &mdash; over 1,000 investors arrived from LA and Salt Lake City. Many never went home. Fremont Street was ground zero for every Las Vegas &ldquo;first&rdquo;: first hotel (Hotel Nevada, 1906, now the Golden Gate), first telephone (1907), first paved road (1925), first traffic light and first gaming license (both 1931).</p>
+      <p class="bt rvl">Then 1931 brought two simultaneous miracles: Nevada legalized gambling, AND Hoover Dam construction began. The dam brought 5,000 workers to the desert. Gambling brought their paychecks back to Fremont Street. The city that had been 800 people in 1909 exploded into a national phenomenon.</p>
+    </div>
+    <div>
+      <div class="sg" style="grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="sc rv"><div class="snum">1905</div><div class="slbl">Las Vegas Founded</div></div>
+        <div class="sc rv"><div class="snum">1906</div><div class="slbl">First Hotel Built</div></div>
+        <div class="sc rv"><div class="snum">1931</div><div class="slbl">Gambling Legalized</div></div>
+        <div class="sc rv"><div class="snum">1941</div><div class="slbl">The Strip Born</div></div>
+        <div class="sc rv"><div class="snum">1946</div><div class="slbl">Flamingo Opens</div></div>
+        <div class="sc rv"><div class="snum">1989</div><div class="slbl">Corporate Era Begins</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- THE STRIP HISTORY -->
+<section class="sbg">
+  <div class="wm">VII</div>
+  <div class="ch rv">Birth of the Strip</div>
+  <h2 class="hl rv" style="color:var(--nred);text-shadow:0 0 30px rgba(255,36,66,.2);">THE STRIP</h2>
+  <div class="tc">
+    <div>
+      <p class="bt rv">The Strip &mdash; that stretch of Las Vegas Boulevard the whole world pictures when they think &ldquo;Las Vegas&rdquo; &mdash; didn&#39;t exist until 1941. Thomas Hull opened <strong>El Rancho Vegas</strong> on Highway 91 south of the city, mostly as a motel for tired drivers. Its success immediately attracted the most dangerous and ambitious businessmen in America.</p>
+      <p class="bt rv">Las Vegas was particularly valuable because Nevada was the only state permitting off-track betting. By the mid-1940s, Bugsy Siegel was receiving $25,000 per month in race wire payments from Las Vegas alone. But he wanted bigger. He found Billy Wilkerson &mdash; founder of the Hollywood Reporter &mdash; who had started building a luxury casino hotel and run out of money. Siegel forced his way in with mob cash.</p>
+      <p class="bt rv">The Flamingo was named after Siegel&#39;s girlfriend Virginia Hill &mdash; nicknamed &ldquo;The Flamingo&rdquo; for her red hair and long legs. It opened December 26, 1946 with Siegel in a tuxedo and pink carnation, Jimmy Durante performing, and George Raft in the audience. It was a financial disaster. Then Siegel was murdered. The mob took over. By 1948, it turned $4 million profit. Every crime family in America now wanted a piece of Las Vegas.</p>
+    </div>
+    <div>
+      <div class="pq rv"><p>The Flamingo&#39;s sleek design and luxury amenities represented a dramatic turn for a town that had embraced a dust-covered Old West theme. Siegel ultimately vindicated himself, even in death.</p><cite>&mdash; The Mob Museum, Las Vegas</cite></div>
+      <div class="sg" style="grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+        <div class="sc rv"><div class="snum">$6M</div><div class="slbl">Flamingo Build Cost</div></div>
+        <div class="sc rv"><div class="snum">$4M</div><div class="slbl">Profit in 1948</div></div>
+        <div class="sc rv"><div class="snum">Dec 26</div><div class="slbl">Opening Night 1946</div></div>
+        <div class="sc rv"><div class="snum">Jun 20</div><div class="slbl">Siegel Murdered 1947</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- VEGAS TIMELINE -->
+<div id="flamingo"></div>
+<section style="background:#0A0805;">
+  <div class="wm">VIII</div>
+  <div class="ch rv">The Golden Age</div>
+  <h2 class="hl gold rv">THE MOB&#39;S<br>LAS VEGAS</h2>
+  <p class="bt rv" style="margin-bottom:3rem;">After Siegel&#39;s murder, experienced mob businessmen ran Las Vegas like a corporation &mdash; except for the skimming. The same men from Newport, Cleveland, and New York built the golden era of the Strip.</p>
+  <div class="tl">
+    <div class="ti"><div class="tyr">1941</div><div class="tdot"></div><div class="tcont"><h3>The Strip Is Born</h3><p>Thomas Hull opens El Rancho Vegas on Highway 91 &mdash; the first resort on what will become the Las Vegas Strip. The casino is almost an afterthought. Its success changes everything.</p></div></div>
+    <div class="ti"><div class="tyr">1946</div><div class="tdot"></div><div class="tcont"><h3>The Flamingo Opens</h3><p>Bugsy Siegel opens the most lavish casino in American history on December 26. Jimmy Durante performs. It loses $300,000 in the first week. Siegel is shot dead six months later. The Flamingo makes $4M in 1948.</p></div></div>
+    <div class="ti"><div class="tyr">1950</div><div class="tdot"></div><div class="tcont"><h3>Moe Dalitz Arrives</h3><p>The same Moe Dalitz who ran Northern Kentucky&#39;s criminal empire with the Cleveland Four opens the Desert Inn. Newport&#39;s organizational genius has officially arrived in the Nevada desert.</p></div></div>
+    <div class="ti"><div class="tyr">1952</div><div class="tdot"></div><div class="tcont"><h3>The Sands Opens</h3><p>With mob financing, the Sands becomes the home of the Rat Pack &mdash; Sinatra, Dean Martin, Sammy Davis Jr. The same celebrities who gambled in Newport&#39;s back rooms now headline legally in Nevada.</p></div></div>
+    <div class="ti"><div class="tyr">1961</div><div class="tdot"></div><div class="tcont"><h3>Newport Falls. Vegas Rises.</h3><p>Bobby Kennedy shuts down Newport. The mob, stripped of their Kentucky base, is now fully committed to Nevada. The Strip becomes the undisputed center of American entertainment.</p></div></div>
+    <div class="ti"><div class="tyr">1966</div><div class="tdot"></div><div class="tcont"><h3>Caesars Palace Opens</h3><p>The Strip reaches its peak mob-era glory. Caesars Palace &mdash; Italian Renaissance fantasy in the Nevada desert &mdash; sets the template for mega-resort Las Vegas. Howard Hughes begins buying Strip properties.</p></div></div>
+    <div class="ti"><div class="tyr">1989</div><div class="tdot"></div><div class="tcont"><h3>Steve Wynn &amp; The Mirage</h3><p>The corporate era begins. The Mirage costs $630 million and opens as the first true megaresort. The mob era is definitively over. The billion-dollar resort era has begun.</p></div></div>
+    <div class="ti"><div class="tyr">1995</div><div class="tdot"></div><div class="tcont"><h3>Fremont Street Experience</h3><p>$70 million revitalizes downtown with a 1,375-foot LED canopy. Old Vegas gets its renaissance. 26 million visitors a year. Vegas Vic still waves from the Pioneer Club, watching it all.</p></div></div>
+  </div>
+</section>
+<!-- FINAL STATEMENT -->
+<div style="width:100%;background:linear-gradient(to bottom,#0A0805,#000,#0A0805);padding:8rem 4rem;text-align:center;">
+  <div class="ch rv" style="justify-content:center;margin-bottom:1.5rem;">The Final Word</div>
+  <div style="max-width:900px;margin:0 auto;">
+    <h2 style="font-family:'Bebas Neue',sans-serif;line-height:.88;margin-bottom:2rem;" class="rv">
+      <span style="font-size:clamp(2.5rem,8vw,8rem);display:block;" class="ngold">NEWPORT</span>
+      <span style="font-size:clamp(1rem,2.5vw,2rem);display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--gr);margin:.3rem 0;">was the proving ground</span>
+      <span style="font-size:clamp(2.5rem,8vw,8rem);display:block;" class="nteal">LAS VEGAS</span>
+      <span style="font-size:clamp(1rem,2.5vw,2rem);display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--gr);margin:.3rem 0;">was the graduation ceremony</span>
+    </h2>
+    <div class="sep rv"><div class="sepc"><span></span><span></span><span></span></div></div>
+    <p class="bt rv" style="max-width:60ch;margin:0 auto;text-align:center;font-size:clamp(1.05rem,1.8vw,1.25rem);">The same men who bribed Newport&#39;s police, built the Beverly Hills Club, ran the numbers rackets, and attracted Frank Sinatra to a Kentucky backroom &mdash; those same men packed their money and their methods and moved to a desert where the law worked in their favor.<br><br><strong>They didn&#39;t escape justice. They went legitimate.</strong><br>And in doing so, they built the most visited entertainment destination in the history of the world.</p>
+    <div class="sep rv"><div class="sepc"><span></span><span></span><span></span></div></div>
+    <p style="font-family:'Special Elite',monospace;font-size:.75rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;" class="rv">The Flamingo Still Stands &middot; The Golden Gate Still Deals &middot; Vegas Vic Still Waves</p>
+  </div>
+</div>
+<footer>
+  <div class="ftitle">Sin City Chronicles</div>
+  <div class="fsub">Newport, Kentucky &middot; Las Vegas, Nevada &middot; 1795 &mdash; Present</div>
+  <div class="hr" style="max-width:400px;margin:2rem auto;"></div>
+  <p class="fsub" style="color:rgba(212,175,55,.4);">The mob didn&#39;t invent America&#39;s vices. They just organized them beautifully.</p>
+  <div class="fnote">Research based on Cincinnati Magazine, NKU Academic Press, Atlas Obscura, The Mob Museum, Britannica, and WCPO Interactive History. For educational and entertainment purposes.</div>
+</footer>
+<script>
+// Cursor
+const cur=document.getElementById("cur"),cur2=document.getElementById("cur2");
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;cur2.style.left=mx+"px";cur2.style.top=my+"px";});
+(function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cur.style.left=cx+"px";cur.style.top=cy+"px";requestAnimationFrame(loop);})();
+// Intro
+setTimeout(()=>{document.getElementById("intro").classList.add("gone");},2600);
+// Progress bar
+window.addEventListener("scroll",()=>{const p=document.getElementById("prog");const h=document.documentElement;const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;p.style.width=pct+"%";});
+// Scroll reveals
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");}});},{threshold:.12});
+document.querySelectorAll(".rv,.rvl,.ti").forEach(el=>obs.observe(el));
+// Accordion
+function toggleAcc(btn){const item=btn.closest(".ai");const wasOpen=item.classList.contains("open");document.querySelectorAll(".ai.open").forEach(i=>i.classList.remove("open"));if(!wasOpen)item.classList.add("open");}
+</script>
+</body>
+</html>
